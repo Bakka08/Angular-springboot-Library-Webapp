@@ -1,0 +1,174 @@
+<div class="container mt-4">
+    <table class="table align-middle mb-0 bg-white">
+      <thead class="bg-light">
+        <tr>
+          <th></th>
+          <th>Name</th>
+          <th>Membership Number</th>
+          <th>Phone</th>
+          <th>
+            <a (click)="openAddPopup()" class="badge badge-warning rounded-pill d-inline" style="background-color: #24a845; color: white; font-weight: bold; cursor: pointer; border-radius: 2px;">ADD +</a>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td class="align-middle text-center">
+            <div class="d-flex align-items-center justify-content-center">
+              <img
+                src="assets/images/avatar.jpg"
+                class="rounded-circle"
+                alt=""
+                style="width: 45px; height: 45px"
+              />
+               
+           
+            </div>
+          </td>
+          <td class="align-middle text-center">
+            <div class="d-flex align-items-center justify-content-center">
+            
+  
+              <div class="ms-3">
+                <p class="fw-bold mb-1">{{ user.firstName }} {{ user.lastName }}</p>
+                <p class="text-muted mb-0">{{ user.email }}</p>
+              </div>
+            </div>
+          </td>
+          <td>
+            <span class="badge badge-warning rounded-pill d-inline">{{ user.membershipNumber }}</span>
+          </td>
+          <td>
+            <i class="flag flag-morocco"></i>
+            (+212)
+            {{ user.contactNumber }}
+          </td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-link btn-rounded btn-sm fw-bold"
+              mdbRipple
+              rippleColor="dark"
+              (click)="openeditPopup(user)">
+              Edit
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+
+
+
+
+  <!-- Popup div -->
+<div class="popup-container" id="popupContainer">
+  <div class="card text-center">
+    <div class="card-body">
+      <form>
+        <div class="row mb-4">
+          <div class="col">
+            <mdb-form-control>
+              <input mdbInput type="text" id="form6Example1" class="form-control" />
+              <label mdbLabel class="form-label" for="form6Example1">First name</label>
+            </mdb-form-control>
+          </div>
+          <div class="col">
+            <mdb-form-control>
+              <input mdbInput type="text" id="form6Example2" class="form-control" />
+              <label mdbLabel class="form-label" for="form6Example2">Last name</label>
+            </mdb-form-control>
+          </div>
+        </div>
+      
+        <!-- Text input -->
+        <mdb-form-control class="mb-4">
+          <input mdbInput type="text" id="form6Example3" class="form-control" />
+          <label mdbLabel class="form-label" for="form6Example3">membership Number</label>
+        </mdb-form-control>
+      
+      
+        <!-- Email input -->
+        <mdb-form-control class="mb-4">
+          <input mdbInput type="email" id="form6Example5" class="form-control" />
+          <label mdbLabel class="form-label" for="form6Example5">Email</label>
+        </mdb-form-control>
+      
+        <!-- Number input -->
+        <mdb-form-control class="form-outline mb-4">
+          <input mdbInput type="text" id="form6Example6" class="form-control" />
+          <label mdbLabel class="form-label" for="form6Example6">Phone</label>
+        </mdb-form-control>
+      
+   
+    
+      </form>
+
+      <a href="#" (click)="addUser()"  class="btn btn-primary">Save</a>
+      &nbsp;
+      <a href="#" (click)="closePopup()"   class="btn btn-danger">Cancel</a>
+      &nbsp;
+    </div>
+
+  </div>
+
+</div>
+
+
+
+  <!-- Popup div -->
+  <div class="popup-container" id="popupContainer2">
+    <div class="card text-center">
+      <div class="card-body">
+        <input  id="idholder2"> 
+        <form>
+          <div class="row mb-4">
+            <div class="col">
+              <mdb-form-control>
+                <input mdbInput type="text" id="form6Example11" class="form-control" />
+                <label mdbLabel class="form-label" for="form6Example1">First name</label>
+              </mdb-form-control>
+            </div>
+            <div class="col">
+              <mdb-form-control>
+                <input mdbInput type="text" id="form6Example21" class="form-control" />
+                <label mdbLabel class="form-label" for="form6Example2">Last name</label>
+              </mdb-form-control>
+            </div>
+          </div>
+        
+          <!-- Text input -->
+          <mdb-form-control class="mb-4">
+            <input mdbInput type="text" id="form6Example31" class="form-control" />
+            <label mdbLabel class="form-label" for="form6Example3">membership Number</label>
+          </mdb-form-control>
+        
+        
+          <!-- Email input -->
+          <mdb-form-control class="mb-4">
+            <input mdbInput type="email" id="form6Example51" class="form-control" />
+            <label mdbLabel class="form-label" for="form6Example5">Email</label>
+          </mdb-form-control>
+        
+          <!-- Number input -->
+          <mdb-form-control class="form-outline mb-4">
+            <input mdbInput type="text" id="form6Example61" class="form-control" />
+            <label mdbLabel class="form-label" for="form6Example6">Phone</label>
+          </mdb-form-control>
+        
+     
+      
+        </form>
+  
+        <a href="#" (click)="updateUser()"  class="btn btn-primary">Update</a>
+        &nbsp;
+        <a href="#" (click)="closePopup2()"   class="btn btn-danger">Cancel</a>
+        &nbsp;
+        <a href="#" (click)="deleteUser()"   class="btn btn-warning"><i class="fas fa-trash"></i></a>
+        &nbsp;
+      </div>
+  
+    </div>
+  
+  </div>

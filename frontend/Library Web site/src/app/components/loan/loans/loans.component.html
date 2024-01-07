@@ -1,0 +1,97 @@
+<div class="container mt-4">
+  <!-- Search Bar -->
+  <div id="main-container" class="row mb-4">
+    <div class="col">
+      <div class="input-group">
+        <input id="search-input" type="text" class="form-control" placeholder="Search..."
+               (input)="applyFilter($event.target.value)">
+        <button id="search-button" class="btn btn-success" type="button" (click)="showNewLoanPopup()">New Loan</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xl-4 col-lg-6 mb-4" *ngFor="let loan of loans">
+      <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="{{ loan.book.image }}" alt="{{ loan.book.title }}" class="img-fluid rounded-start h-100 w-100">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{ loan.user.firstName }} {{ loan.user.lastName }}</h5>
+              <ul class="list-group">
+                <li class="list-group-item">{{ loan.user.email }}</li>
+                <li class="list-group-item">(+212) - {{ loan.user.contactNumber }}</li>
+              </ul>  
+              <div class="d-flex justify-content-center">
+                &nbsp;
+              </div>
+              <div class="d-flex justify-content-center">
+                <small class="badge rounded-pill badge-success" *ngIf="!isLoanEnded(loan.status)">
+                  {{ loan.borrowDate }}
+                </small>
+                &nbsp;
+                <small class="badge rounded-pill badge-danger" *ngIf="!isLoanEnded(loan.status)">
+                  {{ loan.returnDate }}
+                </small>
+                <small class="badge rounded-pill badge-warning" *ngIf="isLoanEnded(loan.status)">
+                  ENDED
+                </small>
+              </div>
+              &nbsp;&nbsp;
+              <a *ngIf="!isLoanEnded(loan.status)" class="btn btn-danger btn-rounded w-100" (click)="endLoan(loan.id)" href="#" role="button" data-ripple-color="dark">End the loan</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Overlay Background for Popup -->
+<div *ngIf="showNewLoanPopupFlag" class="overlay-background"></div>
+<!-- New Loan Popup -->
+<div *ngIf="showNewLoanPopupFlag" class="popup-container" id="newLoanPopup">
+  <div class="card text-center">
+    <div class="card-body">
+      <h5 class="card-title">New Loan</h5>
+
+      <!-- Dropdown 1 -->
+      <div class="form-group row">
+        <label for="dropdown1" class="col-sm-2 col-form-label">User:</label>
+        <div class="col-sm-4">
+          <select class="form-control" id="dropdown1" [(ngModel)]="selectedUserId">
+            <option *ngFor="let user of users" [value]="user.id">{{ user.firstName }} {{ user.lastName }}</option>
+          </select>
+        </div>
+
+        <!-- Dropdown 2 -->
+        <label for="dropdown2" class="col-sm-2 col-form-label">Book:</label>
+        <div class="col-sm-4">
+          <select class="form-control" id="dropdown2" [(ngModel)]="selectedBookId">
+            <option *ngFor="let book of books" [value]="book.id">{{ book.title }}</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Date and Time Picker -->
+      <div class="form-group row">
+        <label for="dateTimePicker" class="col-sm-2 col-form-label">Return at :</label>
+        <div class="col-sm-8 mx-auto">
+          <input type="datetime-local" class="form-control" id="dateTimePicker" [(ngModel)]="selectedReturnDateTime">
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <button type="button" class="btn btn-primary" (click)="addLoan()">Add</button>
+        </div>
+        <div class="col-sm-6">
+          <button type="button" class="btn btn-secondary" (click)="cancelNewLoan()">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
